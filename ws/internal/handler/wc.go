@@ -68,8 +68,7 @@ func count(book, word string) (int64, error) {
 	scanner := bufio.NewScanner(file)
 	w := strings.ToLower(word)
 	for scanner.Scan() {
-		occ := grep.WordCountBytes(w, scanner.Text())
-		count += occ
+		count += grep.WordCountBytes(w, scanner.Text())
 	}
 	if err := scanner.Err(); err != nil {
 		return 0, err
