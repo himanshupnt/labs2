@@ -2,10 +2,9 @@
 
 <br/>
 
-# <img src="assets/lab.png" width="32" height="auto"/> GopherLand Training Level
-II Labs
+# <img src="assets/lab.png" width="32" height="auto"/> GopherLand Training Level II Labs
 
-This repo contains a collection of labs from GopherLand Level II training.
+This repo contains a collection of labs from GopherLand training sessions.
 
 ---
 <img src="assets/imhotep_logo.png" width="32" height="auto"/> © 2020 Imhotep Software LLC.
