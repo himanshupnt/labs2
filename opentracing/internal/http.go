@@ -10,6 +10,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"log"
 	"net/http"
 
 	opentracing "github.com/opentracing/opentracing-go"
@@ -66,7 +67,7 @@ func Call(ctx context.Context, method, url string, payload io.ReadCloser, res in
 	}
 	defer func() {
 		if resp.Body != nil {
-			resp.Body.Close()
+			_ = resp.Body.Close()
 		}
 	}()
 
@@ -98,7 +99,10 @@ func SpanError(ctx context.Context, err error) error {
 
 // WriteErrOut formulate err response and decorate span
 func WriteErrOut(ctx context.Context, w http.ResponseWriter, err error) {
-	_ = SpanError(ctx, err)
+	if e := SpanError(ctx, err); e != nil {
+		log.Printf("Boom! %#v", e)
+		return
+	}
 	// Extract span from context and annotate it.
 	span := opentracing.SpanFromContext(ctx)
 	span.SetTag("http.status_code", http.StatusExpectationFailed)
