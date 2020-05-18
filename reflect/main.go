@@ -35,8 +35,6 @@ func main() {
 	b := BookInfo{
 		Book: "assets/100west.txt",
 	}
-	if err := hydrate(&b); err != nil {
-		log.Fatal(err)
-	}
+	<<!!YOUR_CODE!!>> -- Call your hydrate function to populate a BookInfo instance
 	fmt.Printf("%#v\n", b)
 }
