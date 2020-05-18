@@ -15,7 +15,7 @@
 > track good/bad guess counts as well as tracking a tally of the win/loose rates.
 > Sounds cool?
 
-1. Clone the [Labs Repo](https://github.com/gopherland/labs_int)
+1. Clone the [Labs Repo](https://github.com/gopherland/labs2)
 2. Cd prometheus
 3. Instrument the hangman code base and add 2 prometheus metrics to track your
    good and bad guesses (see metrics.go and game.go).

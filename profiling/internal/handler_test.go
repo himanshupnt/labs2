@@ -6,7 +6,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/gopherland/labs_int/profiling/internal"
+	"github.com/gopherland/labs2/profiling/internal"
 	"github.com/stretchr/testify/assert"
 )
 

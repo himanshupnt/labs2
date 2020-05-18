@@ -1,4 +1,4 @@
-module github.com/gopherland/labs_int/modules/dictionary
+module github.com/gopherland/labs2/modules/dictionary
 
 go 1.14
 

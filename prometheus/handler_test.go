@@ -11,7 +11,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/gopherland/labs_int/prometheus/hangman"
+	"github.com/gopherland/labs2/prometheus/hangman"
 	"github.com/stretchr/testify/assert"
 )
 

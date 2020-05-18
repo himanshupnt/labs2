@@ -10,7 +10,7 @@ import (
 	"math/rand"
 	"net/http"
 
-	"github.com/gopherland/labs_int/picker_svc/internal/dictionary"
+	"github.com/gopherland/labs2/picker_svc/internal/dictionary"
 )
 
 // Handler represents a dictionary handler

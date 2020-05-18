@@ -10,7 +10,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/gopherland/labs_int/picker_svc/internal/web"
+	"github.com/gopherland/labs2/picker_svc/internal/web"
 	"github.com/gorilla/mux"
 	"github.com/justinas/alice"
 	"github.com/rs/zerolog"

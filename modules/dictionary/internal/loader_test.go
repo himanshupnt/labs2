@@ -11,7 +11,7 @@ package internal_test
 import (
 	"testing"
 
-	"github.com/gopherland/labs_int/modules/dictionary/internal"
+	"github.com/gopherland/labs2/modules/dictionary/internal"
 	"github.com/stretchr/testify/assert"
 )
 

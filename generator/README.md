@@ -13,7 +13,7 @@
 
 > Using GO generate, write a program to create stack data structure templates a couple data types.
 
-1. Clone the [Labs Repo](https://github.com/gopherland/labs_int)
+1. Clone the [Labs Repo](https://github.com/gopherland/labs2)
 1. cd generator
 1. Annotate generator/main.go to call `stacker` cli to generate templated stacks implementation
    1. Stacker should takes 2 arguments:

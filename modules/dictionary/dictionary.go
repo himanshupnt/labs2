@@ -6,7 +6,7 @@
 package dictionary
 
 import (
-	"github.com/gopherland/labs_int/modules/dictionary/internal"
+	"github.com/gopherland/labs2/modules/dictionary/internal"
 )
 
 // WordList a collection of dictionary words.

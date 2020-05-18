@@ -1,4 +1,4 @@
-module github.com/gopherland/labs_int/modules/picker
+module github.com/gopherland/labs2/modules/picker
 
 go 1.14
 

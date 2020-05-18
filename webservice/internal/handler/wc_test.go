@@ -10,7 +10,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/gopherland/labs_int/ws/internal/handler"
+	"github.com/gopherland/labs2/ws/internal/handler"
 	"github.com/gorilla/mux"
 	"github.com/stretchr/testify/assert"
 )

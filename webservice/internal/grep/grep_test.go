@@ -7,7 +7,7 @@ package grep_test
 import (
 	"testing"
 
-	"github.com/gopherland/labs_int/ws/internal/grep"
+	"github.com/gopherland/labs2/ws/internal/grep"
 	"github.com/stretchr/testify/assert"
 )
 

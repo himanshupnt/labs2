@@ -1,4 +1,4 @@
-module github.com/gopherland/labs_int/prometheus/hangman
+module github.com/gopherland/labs2/prometheus/hangman
 
 go 1.14
 

@@ -1,4 +1,4 @@
-module github.com/gopherland/labs_int/opentracing
+module github.com/gopherland/labs2/opentracing
 
 go 1.14
 

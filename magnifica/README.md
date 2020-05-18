@@ -13,7 +13,7 @@
 
 > Implement a dictionary word marshaller to interface with different dictionary vendors.
 
-* Clone the [Labs Repo](https://github.com/gopherland/labs_int)
+* Clone the [Labs Repo](https://github.com/gopherland/labs2)
 * Cd magnifica
 * Our business `Encyclopedia Magnifica` exposes world class dictionary words to our clients.
 * Most of our dictionary vendors provide JSON APIs exposing `jurassic` dictionary entries.

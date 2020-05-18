@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/gopherland/labs_int/prometheus/hangman"
+	"github.com/gopherland/labs2/prometheus/hangman"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/prometheus/client_golang/prometheus/promhttp"

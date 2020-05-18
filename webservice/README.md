@@ -13,7 +13,7 @@
 > Create a grep service that will accept a book and a word and returns a JSON response
 > representing the number of occurrences of that word.
 
-1. Clone the [Labs Repo](https://github.com/gopherland/labs_int)
+1. Clone the [Labs Repo](https://github.com/gopherland/labs2)
 1. Cd ws
 1. Edit internal/handler/wc.go and implement a GrepHandler
    1. The handler gets a book and a word from the request url

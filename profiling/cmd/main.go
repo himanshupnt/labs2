@@ -9,7 +9,7 @@ import (
 	"net/http"
 	_ "net/http/pprof"
 
-	"github.com/gopherland/labs_int/profiling/internal"
+	"github.com/gopherland/labs2/profiling/internal"
 )
 
 const httpPort = ":4500"

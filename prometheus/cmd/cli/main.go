@@ -16,7 +16,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/gopherland/labs_int/prometheus/hangman"
+	"github.com/gopherland/labs2/prometheus/hangman"
 	"github.com/pkg/errors"
 )
 

@@ -1,4 +1,4 @@
-module github.com/gopherland/labs_int/grep
+module github.com/gopherland/labs2/grep
 
 go 1.14
 
