@@ -17,7 +17,7 @@
     fib(n) = fib(n-2)+fib(n-1)
   ```
 
-+ Clone the [Labs Repo](https://github.com/gopherland/labs_int)
++ Clone the [Labs Repo](https://github.com/gopherland/labs2)
 + Cd profiling
 + A Fib service initial implementation has been provided for you.
 + Using profiling technics, establish the service performance profile and baseline.

@@ -19,7 +19,7 @@
 > The Castle service returns either a 200 with a castle melted message if the
 > knight is the `NightKing` 😵 or a 417 error with *only NightKing can melt* otherwise.
 
-1. Clone the [labs repo](https://github.com/gopherland/labs_int)
+1. Clone the [labs repo](https://github.com/gopherland/labs2)
 2. cd opentracing
 3. Instrument the Castle service (cmd/castle/root.go) by tracing incoming *melt* requests
    1. Create a top level span for all new incoming requests

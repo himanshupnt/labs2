@@ -18,7 +18,7 @@ import (
 type BookInfo struct {
 	Book  string
 	Lines int
-	IBN   string `md5:"ibn"`
+	IBN   string `sha1:"ibn"`
 	Words int
 }
 
@@ -28,11 +28,7 @@ func wc(line string) int {
 }
 
 func hydrate(b interface{}) error {
-	rb := reflect.ValueOf(b)
-	if rb.Type().Kind() != reflect.Ptr {
-		fmt.Println("YO!")
-		rb = reflect.Indirect(rb)
-	}
+	rb := reflect.Indirect(reflect.ValueOf(b))
 
 	file := rb.FieldByName("Book").String()
 	f, err := os.Open(file)
@@ -46,7 +42,7 @@ func hydrate(b interface{}) error {
 		count += wc(sc.Text())
 		line++
 	}
-	rb.FieldByName("Words").Elem().SetInt(int64(count))
+	rb.FieldByName("Words").SetInt(int64(count))
 
 	ibnT, _ := reflect.Indirect(rb).Type().FieldByName("IBN")
 	if _, ok := ibnT.Tag.Lookup("sha1"); ok {
@@ -56,14 +52,6 @@ func hydrate(b interface{}) error {
 	}
 	rb.FieldByName("Lines").SetInt(int64(line))
 
-	// fmt.Println(ib.NumField())
-	// bf, ok := ib.FieldByName("Book")
-	// if !ok {
-	// 	return fmt.Errorf("No book field detected!")
-	// }
-	// bf.Interface()
-	// fmt.Println()
-
 	return nil
 }
 
@@ -71,12 +59,9 @@ func main() {
 	b := BookInfo{
 		Book: "assets/100west.txt",
 	}
-	if err := hydrate(b); err != nil {
+	if err := hydrate(&b); err != nil {
 		log.Fatal(err)
 	}
 
-	// if err := hydrate(&b); err != nil {
-	// 	log.Fatal(err)
-	// }
-	fmt.Printf("%#v\n", b)
+	fmt.Printf("%v\n", b)
 }

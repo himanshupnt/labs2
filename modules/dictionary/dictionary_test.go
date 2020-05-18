@@ -7,7 +7,7 @@ package dictionary_test
 import (
 	"testing"
 
-	"github.com/gopherland/labs_int/modules/dictionary"
+	"github.com/gopherland/labs2/modules/dictionary"
 	"github.com/stretchr/testify/assert"
 )
 

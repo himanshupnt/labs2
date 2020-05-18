@@ -10,7 +10,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/gopherland/labs_int/ws/internal/handler"
+	"github.com/gopherland/labs2/ws/internal/handler"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 )

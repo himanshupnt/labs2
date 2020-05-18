@@ -13,7 +13,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/gopherland/labs_int/ws/internal/grep"
+	"github.com/gopherland/labs2/ws/internal/grep"
 	"github.com/gorilla/mux"
 )
 

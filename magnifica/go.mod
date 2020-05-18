@@ -1,4 +1,4 @@
-module github.com/gopherland/labs_int/magnifica
+module github.com/gopherland/labs2/magnifica
 
 go 1.14
 

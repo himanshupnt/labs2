@@ -12,7 +12,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/gopherland/labs_int/grep"
+	"github.com/gopherland/labs2/grep"
 )
 
 func main() {

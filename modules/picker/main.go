@@ -12,7 +12,7 @@ import (
 	"time"
 
 	"github.com/gookit/color"
-	"github.com/gopherland/labs_int/modules/dictionary"
+	"github.com/gopherland/labs2/modules/dictionary"
 )
 
 func init() {

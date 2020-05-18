@@ -1,4 +1,4 @@
-module github.com/gopherland/labs_int/profiling
+module github.com/gopherland/labs2/profiling
 
 go 1.14
 

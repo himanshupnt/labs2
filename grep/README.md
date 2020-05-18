@@ -14,7 +14,7 @@
 > Your CLI application should take a word and a file name args and
 > report back the number of occurrences of the word in the file.
 
-* Clone the [labs repo](https://github.com/gopherland/labs_int)
+* Clone the [labs repo](https://github.com/gopherland/labs2)
 * Cd grep
 * An initial implementation of `CountWord` function is provided
 * Implement a test for the `CountWord` function

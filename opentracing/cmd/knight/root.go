@@ -13,7 +13,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/gopherland/labs_int/opentracing/internal"
+	"github.com/gopherland/labs2/opentracing/internal"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	opentracing "github.com/opentracing/opentracing-go"

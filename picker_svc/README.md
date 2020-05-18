@@ -11,7 +11,7 @@
 
 > Build and Dockerize a Word Picker Web Service!
 
-1. Clone the [Labs Repo](https://github.com/gopherland/labs_int)
+1. Clone the [Labs Repo](https://github.com/gopherland/labs2)
 2. cd picker_svc
 3. Make sure Docker is installed (see installation below)!
 4. Create your module file for your repository using your OWN github user handle!

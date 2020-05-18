@@ -8,7 +8,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/gopherland/labs_int/magnifica"
+	"github.com/gopherland/labs2/magnifica"
 	"github.com/stretchr/testify/assert"
 )
 

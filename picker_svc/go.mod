@@ -1,4 +1,4 @@
-module github.com/gopherland/labs_int/picker_svc
+module github.com/gopherland/labs2/picker_svc
 
 go 1.14
 

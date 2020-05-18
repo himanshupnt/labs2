@@ -7,7 +7,7 @@ package fib_test
 import (
 	"testing"
 
-	"github.com/gopherland/labs_int/profiling/internal/fib"
+	"github.com/gopherland/labs2/profiling/internal/fib"
 	"github.com/stretchr/testify/assert"
 )
 

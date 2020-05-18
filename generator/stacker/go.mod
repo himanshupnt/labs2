@@ -1,4 +1,4 @@
-module github.com/gopherland/labs_int/stacker
+module github.com/gopherland/labs2/stacker
 
 go 1.14
 

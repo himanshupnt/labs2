@@ -13,7 +13,7 @@
 
 > Implement two separate modules aka dictionary and picker. The dictionary module produces a list of words from a given dictionary. The picker modules picks a random word leveraging the dictionary module.
 
-* Clone the [Labs Repo](https://github.com/gopherland/labs_int)
+* Clone the [Labs Repo](https://github.com/gopherland/labs2)
 * cd modules
 * Dictionary Module (modules/dictionary)
   * Leveraging the given tests, implement a dictionary loader.
