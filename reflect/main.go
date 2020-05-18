@@ -8,6 +8,7 @@ import (
 	"bufio"
 	"crypto/md5"
 	"crypto/sha1"
+	"errors"
 	"fmt"
 	"log"
 	"os"
@@ -18,7 +19,7 @@ import (
 type BookInfo struct {
 	Book  string
 	Lines int
-	IBN   string `sha1:"ibn"`
+	IBN   string `md5:"ibn"`
 	Words int
 }
 
@@ -27,30 +28,59 @@ func wc(line string) int {
 	return len(tokens)
 }
 
+func readLines(path string) (chan string, chan error) {
+	out, errC := make(chan string), make(chan error, 1)
+
+	go func(path string, out chan<- string, errC chan<- error) {
+		defer func() {
+			close(out)
+			close(errC)
+		}()
+		f, err := os.Open(path)
+		if err != nil {
+			errC <- err
+			return
+		}
+
+		sc := bufio.NewScanner(f)
+		for sc.Scan() {
+			out <- sc.Text()
+		}
+		if err := sc.Err(); err != nil {
+			errC <- err
+		}
+	}(path, out, errC)
+
+	return out, errC
+}
+
 func hydrate(b interface{}) error {
 	rb := reflect.Indirect(reflect.ValueOf(b))
 
-	file := rb.FieldByName("Book").String()
-	f, err := os.Open(file)
-	if err != nil {
-		return err
+	book := rb.FieldByName("Book")
+	if !book.IsValid() {
+		return errors.New("Unable to find field Book")
 	}
 
-	var count, line int
-	sc := bufio.NewScanner(f)
-	for sc.Scan() {
-		count += wc(sc.Text())
-		line++
+	path := book.String()
+	out, errC := readLines(path)
+	var words, lines int
+	for line := range out {
+		words += wc(line)
+		lines++
 	}
-	rb.FieldByName("Words").SetInt(int64(count))
+	if err, ok := <-errC; ok && err != nil {
+		return err
+	}
+	rb.FieldByName("Words").SetInt(int64(words))
 
 	ibnT, _ := reflect.Indirect(rb).Type().FieldByName("IBN")
 	if _, ok := ibnT.Tag.Lookup("sha1"); ok {
-		rb.FieldByName("IBN").SetString(fmt.Sprintf("%x", sha1.Sum([]byte(file))))
+		rb.FieldByName("IBN").SetString(fmt.Sprintf("%x", sha1.Sum([]byte(path))))
 	} else if _, ok := ibnT.Tag.Lookup("md5"); ok {
-		rb.FieldByName("IBN").SetString(fmt.Sprintf("%x", md5.Sum([]byte(file))))
+		rb.FieldByName("IBN").SetString(fmt.Sprintf("%x", md5.Sum([]byte(path))))
 	}
-	rb.FieldByName("Lines").SetInt(int64(line))
+	rb.FieldByName("Lines").SetInt(int64(lines))
 
 	return nil
 }
