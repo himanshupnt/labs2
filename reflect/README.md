@@ -38,7 +38,7 @@ type BookInfo struct {
    Words int
 }
 b := BookInfo{
-   File: "assets/100west.txt,
+   Book: "assets/100west.txt,
 }
 ```
 
@@ -63,7 +63,7 @@ type BookInfo struct {
    Words int
 }
 b := BookInfo{
-   File: "assets/100west.txt,
+   Book: "assets/100west.txt,
 }
 ```
 
