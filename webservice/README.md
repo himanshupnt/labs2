@@ -32,7 +32,7 @@
 ## Expectations
 
 ```shell
-   http :5000/v1/wc/moby/moby
+   http :5000/v1/wc/3lpigs/pig
 ```
 
 Produces...
