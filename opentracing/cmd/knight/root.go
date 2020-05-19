@@ -75,10 +75,12 @@ func meltHandler(w http.ResponseWriter, r *http.Request) {
 
 	var resp internal.Response
 	if err := internal.Call(spanCtx, "POST", urlFor("api/v1/melt"), r.Body, &resp); err != nil {
+		fmt.Println("BOOM!", err)
 		internal.WriteErrOut(spanCtx, w, err)
 		return
 	}
 
+	fmt.Println("YO!", resp)
 	// writes out the quest response.
 	writeResponse(spanCtx, w, resp)
 }
