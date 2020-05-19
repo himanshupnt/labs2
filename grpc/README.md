@@ -8,7 +8,7 @@
 
 ## <img src="../assets/lab.png" width="auto" height="32"/> Your Mission
 
-> Turn book grep into a gRPC service
+> Turn you BookGrep library into a gRPC service
 
 > Create a grep gRPC service that will accept a book and a word and returns a response
 > representing the number of occurrences of that word.
@@ -33,6 +33,7 @@
    1. A logging interceptor to log the server requests
    2. A Measure interceptor to track the requests duration
 8. Launch your service and make sure your endpoint is correctly decorated!
+9. BONUS!! Use a generator to generate your protobuff stubs
 
 ## Expectations
 
