@@ -1,4 +1,4 @@
-module github.com/gopherland/labs2/ws
+module github.com/gopherland/labs2/webservice
 
 go 1.14
 

@@ -10,7 +10,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/gopherland/labs2/ws/internal/handler"
+	"github.com/gopherland/labs2/webservice/internal/handler"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 )
@@ -23,7 +23,7 @@ const (
 
 func main() {
 	r := mux.NewRouter()
-	r.HandleFunc(`/v1/wc/{book:\w+}/{word:\w+}`, handler.CountHandler)
+	r.HandleFunc(`/v1/grep/{book:\w+}/{word:\w+}`, handler.CountHandler)
 	r.Use(mux.CORSMethodMiddleware(r))
 	r.Use(func(h http.Handler) http.Handler {
 		return handlers.LoggingHandler(os.Stdout, h)
@@ -35,6 +35,6 @@ func main() {
 		WriteTimeout: defaultWriteTimeout,
 		ReadTimeout:  defaultReadTimeout,
 	}
-	log.Printf("[WordCount] Service listening on port %s", port)
+	log.Printf("[WebGrep] Service listening on port %s", port)
 	log.Panic(svc.ListenAndServe())
 }
