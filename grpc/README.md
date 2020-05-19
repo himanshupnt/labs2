@@ -8,7 +8,7 @@
 
 ## <img src="../assets/lab.png" width="auto" height="32"/> Your Mission
 
-> Turn book grep into a gRPC service
+> Turn your Grep library into a gRPC BookGrep service
 
 > Create a grep gRPC service that will accept a book and a word and returns a response
 > representing the number of occurrences of that word.
