@@ -14,25 +14,34 @@
 > representing the number of occurrences of that word.
 
 1. Clone the [Labs Repo](https://github.com/gopherland/labs2)
-2. Cd ws
-3. Edit internal/handler/grep.go and implement a GrepHandler
+2. Cd webservice
+3. Edit internal/handler/count.go and implement a CountHandler
    1. The handler gets a book and a word from the request url
    2. Use the countWords function to compute the number of occurrences
    3. Return a json response that contains the following fields:
       1. Book
       2. Word
       3. Occurrences
-   4. Write a test (grep_test.go) to make sure your handler is working correctly
-4. Edit main.go and define a gorilla mux route to your GrepHandler
+   4. Write a test (count_test.go) to make sure your handler is working correctly
+4. Edit main.go and define a gorilla mux route to your CountHandler
    1. Use: /v1/grep/book/word as your endpoint
    2. Next define a logging middleware to log incoming requests
       1. Use the [Gorilla Handlers Repo](https://github.com/gorilla/handlers)
 5. Launch your service and make sure your endpoint is working correctly!
 
+## OSX Install HTTPie (Totally Optional!!)
+
+```shell
+# Install httpie
+brew install httpie
+```
+
 ## Expectations
 
 ```shell
-   http :5000/v1/wc/3lpigs/pig
+http :5000/v1/grep/3lpigs/pig
+# Or...
+curl -XGET http://localhost:5000/v1/grep/3lpigs/pig
 ```
 
 Produces...
