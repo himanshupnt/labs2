@@ -20,9 +20,9 @@
 * So we've decided to abstract away their discrepancies by defining our very own Dictionary Entry as follows:
   * Dictionary string
   * Location string
-  * Vendor string
   * Word string
-  * slang bool (private)
+  * Slang bool
+  * origin string (private)
 * Implement a Marshaller to interface with our new vendor ACME Dictionary.
   * The ACME JSON API exposes the following fields:
     * dictionary_location string
