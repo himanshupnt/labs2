@@ -25,15 +25,7 @@ func WordCount(word, line string) (count int64) {
 	return
 }
 
-// WordCountBytes returns the number of occurrence of a word in a line.
-func WordCountBytes(word, line string) (count int64) {
-	var (
-		index int
-		l     = strings.ToLower(line)
-	)
-	for _, b := range []byte(l) {
-		<<!!YOUR_CODE!!>> Iterate thru the line a byte at a time and compare with the byte in the word
-	}
-
-	return
+// WordCountV2 returns the number of occurrence of a word in a line.
+func WordCountV2(word, line string) (count int64) {
+	<<!!YOUR_CODE!!>> Iterate thru the line a byte at a time and compare with the bytes in the word
 }
