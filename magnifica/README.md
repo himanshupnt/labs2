@@ -20,9 +20,9 @@
 * So we've decided to abstract away their discrepancies by defining our very own Dictionary Entry as follows:
   * Dictionary string
   * Location string
-  * Vendor string
   * Word string
-  * slang bool (private)
+  * Slang bool
+  * origin string (private)
 * Implement a Marshaller to interface with our new vendor ACME Dictionary.
   * The ACME JSON API exposes the following fields:
     * dictionary_location string
@@ -31,7 +31,7 @@
     * political_correctness bool
 * Implement a Marshaller for our Dictionary Entry to interface with the ACME API.
 * Implement the necessary tests to make sure we can correctly marshal/unmarshal our dictionary entries to the ACME specification.
-* Ensure all your tests are producing the desired outputs!
+* Ensure all your test are producing the desired outputs!
 
 ---
 <img src="../assets/imhotep_logo.png" width="32" height="auto"/> © 2020 Imhotep Software LLC.
