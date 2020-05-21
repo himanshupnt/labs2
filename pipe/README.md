@@ -16,7 +16,7 @@
 * The given serial program computes MD5 digests from a collection of books.
 * Break out this serial process into a single stage concurrent pipeline.
 * BONUS! Use a multi-stage pipeline
-* BONUS! Benchmark your results
+* BONUS! Test and Benchmark your results!
 
 ---
 <img src="../assets/imhotep_logo.png" width="32" height="auto"/> © 2020 Imhotep Software LLC.
