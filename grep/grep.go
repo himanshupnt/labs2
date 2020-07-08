@@ -27,11 +27,8 @@ func WordCount(word, line string) (count int64) {
 
 // WordCountBytes returns the number of occurrence of a word in a line.
 func WordCountBytes(word, line string) (count int64) {
-	var (
-		index int
-		l     = strings.ToLower(line)
-	)
-	for _, b := range []byte(l) {
+	var index int
+	for _, b := range []byte(strings.ToLower(line)) {
 		if b != word[index] {
 			index = 0
 			continue
