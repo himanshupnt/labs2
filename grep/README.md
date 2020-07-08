@@ -20,7 +20,7 @@
 * Implement a test for the `CountWord` function
 * Benchmark your CountWord function.
 * Is it cpu or memory bound?
-* Using `benchstat` checkout to variation and make sure you have a solid measurement.
+* Using `benchstat` checkout the variance and make sure you have a solid measurement.
 * Can you speed up your initial implementation?
 * Implement and test a second implementation.
 * Using `benchstat` compare your first and second implementations.
