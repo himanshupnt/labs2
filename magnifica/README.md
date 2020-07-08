@@ -27,7 +27,6 @@
   * The ACME JSON API exposes the following fields:
     * dictionary_location string
     * dictionary_word string
-    * dictionary_creation_time int64 (unix nano)
     * political_correctness bool
 * Implement a Marshaller for our Dictionary Entry to interface with the ACME API.
 * Implement the necessary tests to make sure we can correctly marshal/unmarshal our dictionary entries to the ACME specification.
