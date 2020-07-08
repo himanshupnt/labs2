@@ -5,8 +5,6 @@
 package magnifica
 
 import (
-	"time"
-
 	"encoding/json"
 	"path/filepath"
 )
@@ -35,7 +33,6 @@ type acmeEntry struct {
 }
 
 func (v acmeEntry) toEntry() Entry {
-	time.Now().UTC().UnixNano()
 	dir, dic := filepath.Split(v.Location)
 	return Entry{
 		Dictionary: dic,
