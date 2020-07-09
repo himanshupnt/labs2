@@ -98,7 +98,7 @@ func md5Pipe(dir string) error {
 }
 
 func md5Walk(dir string) (<-chan digest, <-chan error) {
-	out, errc := make(chan digest), make(chan error, 1)
+	out, errc := make(chan digest, 2), make(chan error, 1)
 	var wg sync.WaitGroup
 
 	files, err := ioutil.ReadDir(dir)

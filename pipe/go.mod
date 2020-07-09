@@ -1,3 +1,3 @@
-module github.com/gopherland/labs/debugger
+module github.com/gopherland/labs/pipe
 
 go 1.14
