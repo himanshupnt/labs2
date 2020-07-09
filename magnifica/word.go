@@ -9,6 +9,9 @@ import (
 	"path/filepath"
 )
 
+// Note: Compile check
+var _ json.Marshaler = (*Entry)(nil)
+
 // Entry represents a dictionary entry
 type Entry struct {
 	Dictionary string
@@ -42,9 +45,6 @@ func (v acmeEntry) toEntry() Entry {
 		origin:     "ACME",
 	}
 }
-
-// Note: Compile check
-var _ json.Marshaler = (*Entry)(nil)
 
 // MarshalJSON converts entry into raw json
 func (w *Entry) MarshalJSON() ([]byte, error) {
