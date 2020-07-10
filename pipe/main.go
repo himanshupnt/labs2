@@ -58,7 +58,12 @@ func md5Serial(dir string) error {
 		d.digest(raw)
 		mm[d.file] = d.sum
 	}
+  collate(mm)
 
+	return nil
+}
+
+func collate(mm map[string][md5.Size]byte) {
 	keys := make([]string, 0, len(mm))
 	for k := range mm {
 		keys = append(keys, k)
@@ -67,8 +72,6 @@ func md5Serial(dir string) error {
 	for _, k := range keys {
 		fmt.Printf("%x  %s\n", mm[k], k)
 	}
-
-	return nil
 }
 
 func md5Pipe(dir string) error {
