@@ -49,8 +49,9 @@ func BenchmarkWordCountV2(b *testing.B) {
 	txt := string(raw)
 	b.ReportAllocs()
 	b.ResetTimer()
+
 	for n := 0; n < b.N; n++ {
-		grep.WordCountBytes("m0by", txt)
+		grep.WordCountBytes("moby", txt)
 	}
 }
 
