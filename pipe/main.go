@@ -58,12 +58,12 @@ func md5Serial(dir string) error {
 		d.digest(raw)
 		mm[d.file] = d.sum
 	}
-	dump(mm)
+	collate(mm)
 
 	return nil
 }
 
-func dump(mm map[string][md5.Size]byte) {
+func collate(mm map[string][md5.Size]byte) {
 	keys := make([]string, 0, len(mm))
 	for k := range mm {
 		keys = append(keys, k)
@@ -89,7 +89,7 @@ func md5Pipe(dir string) error {
 	if err, ok := <-errc; ok {
 		return err
 	}
-	dump(mm)
+	collate(mm)
 
 	return nil
 }
@@ -109,7 +109,6 @@ func md5Walk(dir string) (<-chan digest, <-chan error) {
 			defer wg.Done()
 			raw, err := ioutil.ReadFile(filepath.Join(dir, f))
 			if err != nil {
-				fmt.Println(err)
 				errc <- err
 				return
 			}
