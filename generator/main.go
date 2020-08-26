@@ -9,10 +9,10 @@ import (
 	"log"
 
 	"github.com/gookit/color"
-	"github.com/gopherland/labs2/generator/stacks"
+	<<!!YOUR_CODE!!> -- Specify your generic stacks package
 )
 
-//go:generate stacker -t float64,int32 -p stacks
+<!!YOUR_CODE!!> -- Add stacker generator to generate the generic stacks
 func main() {
 	fmt.Print("\033[H\033[2J")
 
@@ -25,13 +25,14 @@ func tryFloat() {
 	for _, v := range []float64{10.5, 20.2, 42.25} {
 		s.Push(v)
 	}
+	fmt.Printf("🥞 %-7s Pushed:%v -- ", "Float64", &s)
 	v, err := s.Pop()
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	cyan, green := color.FgCyan.Render, color.FgGreen.Render
-	log.Printf("🥞 %-10s Pop:%v -- Top:%s -- Peek:%v", "Float64", cyan(v), green(s.Top()), &s)
+	fmt.Printf("Pop:%v - Top:%s --> Peek:%v\n", cyan(v), green(s.Top()), &s)
 }
 
 func tryInt() {
@@ -39,11 +40,12 @@ func tryInt() {
 	for _, v := range []int32{200, 100, 300} {
 		s.Push(v)
 	}
+	fmt.Printf("📚 %-7s Pushed:%v     -- ", "Int32", &s)
 	v, err := s.Pop()
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	cyan, green := color.FgCyan.Render, color.FgGreen.Render
-	log.Printf("📚 %-10s Pop:%v   -- Top:%s  -- Peek:%v", "Int32", cyan(v), green(s.Top()), &s)
+	fmt.Printf("Pop:%v   - Top:%s  --> Peek:%v\n", cyan(v), green(s.Top()), &s)
 }
