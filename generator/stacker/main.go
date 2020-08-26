@@ -53,7 +53,7 @@ func genFile(pkg, ztype string, isTest bool, fn templateFn) error {
 		"asType": toTypeName,
 	}
 	tpl := template.Must(template.New("stacks").Funcs(fMap).Parse(fn()))
-	buff := bytes.NewBuffer([]byte{})
+	var buff bytes.Buffer
 	str := struct {
 		Package string
 		Type    string
@@ -61,7 +61,7 @@ func genFile(pkg, ztype string, isTest bool, fn templateFn) error {
 		Package: pkg,
 		Type:    ztype,
 	}
-	if err := tpl.Execute(buff, str); err != nil {
+	if err := tpl.Execute(&buff, str); err != nil {
 		return err
 	}
 
