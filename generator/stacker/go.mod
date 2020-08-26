@@ -1,6 +1,6 @@
 module github.com/gopherland/labs2/stacker
 
-go 1.14
+go 1.15
 
 require (
 	github.com/google/go-cmp v0.4.0 // indirect
