@@ -51,11 +51,11 @@ func genFile(pkg, ztype string, isTest bool, fn templateFn) error {
 
 	<<!!YOUR_CODE!!>>
 	  - Hydrate your template using the provided template function (refer to the template lab!)
-		- Note this time we will need to hydrate the template into a bytes.Buffer to store the generated template
-		- The templates uses a struct and a template function, scan the templates (tpl.go) to see what the struct fields and template function should be called
-		- Define a template function_map as the template needs to generate a custom stack type struct name
-		  - So if the type is float64 then the stack struct type name will be Float64
-			- The functionMap key should be `asType` and use the implemented `toTypeName` function below
+		- Note: this time we will need to hydrate the template into a bytes.Buffer to store the generated template
+		- Scan the stack template (tpl.go) and see what data structure and template function the provided template needs
+		- Setup your data structure and template function map
+		- Execute the template so that your bytes buffer (buff) gets populated
+		- The provided code will create the file and save it into the provided package directory.
 
 	fileName := ztype
 	if isTest {
