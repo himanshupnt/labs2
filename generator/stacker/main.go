@@ -29,7 +29,7 @@ func main() {
 func generate(pkg, types string) {
 	tt := strings.Split(types, ",")
 	if len(tt) == 0 {
-		panic("No stack types specified")
+		panic("you must specify some stack types")
 	}
 	for _, t := range tt {
 		log.Printf("Generating Stack for %s::%s", pkg, t)
