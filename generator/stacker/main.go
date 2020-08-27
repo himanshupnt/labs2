@@ -19,7 +19,7 @@ type templateFn func() string
 
 func main() {
 	var pkg, types string
-	flag.StringVar(&types, "t", "", "Specify one or more types column separated")
+	flag.StringVar(&types, "t", "", "Specify one or more colon separated types")
 	flag.StringVar(&pkg, "p", "stacks", "Specify the stack package name")
 	flag.Parse()
 
@@ -28,6 +28,9 @@ func main() {
 
 func generate(pkg, types string) {
 	tt := strings.Split(types, ",")
+	if len(tt) == 0 {
+		panic("No stack types specified")
+	}
 	for _, t := range tt {
 		log.Printf("Generating Stack for %s::%s", pkg, t)
 		if err := generateFiles(pkg, t); err != nil {
