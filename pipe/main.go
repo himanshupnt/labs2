@@ -1,48 +1,54 @@
 package main
 
 import (
+	"context"
 	"crypto/md5"
 	"flag"
 	"fmt"
+	"io"
 	"io/ioutil"
+	"log"
+	"os"
 	"path/filepath"
 	"sort"
 	"sync"
 	"time"
 )
 
+const assetDir = "assets"
+
 type digest struct {
 	file string
 	sum  [md5.Size]byte
-	err  error
 }
 
-func (d *digest) digest(raw []byte) {
-	d.sum = md5.Sum(raw)
+func newDigest(f string, raw []byte) digest {
+	return digest{
+		file: f,
+		sum:  md5.Sum(raw),
+	}
 }
 
 func main() {
 	var parallel bool
-	flag.BoolVar(&parallel, "p", false, "Toggle the run mode")
+	flag.BoolVar(&parallel, "p", false, "Enable parallel mode")
 	flag.Parse()
 
 	if parallel {
-		if err := md5Pipe("assets"); err != nil {
-			panic(err)
+		ctx, cancel := context.WithTimeout(context.Background(), 500*time.Microsecond)
+		defer cancel()
+		if err := md5Parallel(ctx, os.Stdout, assetDir); err != nil {
+			log.Fatal(err)
 		}
 		return
 	}
 
-	if err := md5Serial("assets"); err != nil {
-		panic(err)
+	if err := md5Serial(os.Stdout, assetDir); err != nil {
+		log.Fatal(err)
 	}
 }
 
-func md5Serial(dir string) error {
-	defer func(t time.Time) {
-		fmt.Printf("Serial %v\n", time.Since(t))
-	}(time.Now())
-
+func md5Serial(w io.Writer, dir string) error {
 	files, err := ioutil.ReadDir(dir)
 	if err != nil {
 		return err
@@ -54,72 +60,62 @@ func md5Serial(dir string) error {
 		if err != nil {
 			return err
 		}
-		d := digest{file: f.Name()}
-		d.digest(raw)
+		d := newDigest(f.Name(), raw)
 		mm[d.file] = d.sum
 	}
-	collate(mm)
+	collate(w, mm)
 
 	return nil
 }
 
-func collate(mm map[string][md5.Size]byte) {
-	keys := make([]string, 0, len(mm))
-	for k := range mm {
-		keys = append(keys, k)
-	}
-	sort.Strings(keys)
-	for _, k := range keys {
-		fmt.Printf("%x  %s\n", mm[k], k)
-	}
-}
-
-func md5Pipe(dir string) error {
-	defer func(t time.Time) {
-		fmt.Printf("Pipe %v\n", time.Since(t))
-	}(time.Now())
-
-	out, errc := md5Walk(dir)
-
+func md5Parallel(ctx context.Context, w io.Writer, dir string) error {
+	fileChan, err1 := readDir(ctx, dir)
+	out, err2 := computeDigest(ctx, dir, fileChan)
 	mm := make(map[string][md5.Size]byte)
 	for d := range out {
 		mm[d.file] = d.sum
 	}
-
-	if err, ok := <-errc; ok {
-		return err
+	select {
+	case e, ok := <-err1:
+		if ok {
+			return e
+		}
+	case e, ok := <-err2:
+		if ok {
+			return e
+		}
 	}
-	collate(mm)
+	collate(w, mm)
 
 	return nil
 }
 
-func md5Walk(dir string) (<-chan digest, <-chan error) {
+func computeDigest(ctx context.Context, dir string, in <-chan os.FileInfo) (<-chan digest, <-chan error) {
 	out, errc := make(chan digest, 2), make(chan error, 1)
 	var wg sync.WaitGroup
 
-	files, err := ioutil.ReadDir(dir)
-	if err != nil {
-		errc <- err
-		return out, errc
-	}
-	for _, f := range files {
-		wg.Add(1)
-		go func(f string) {
-			defer wg.Done()
-			raw, err := ioutil.ReadFile(filepath.Join(dir, f))
-			if err != nil {
-				errc <- err
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		for f := range in {
+			select {
+			case <-ctx.Done():
+				errc <- ctx.Err()
 				return
+			default:
+				wg.Add(1)
+				go func(f string) {
+					defer wg.Done()
+					raw, err := ioutil.ReadFile(filepath.Join(dir, f))
+					if err != nil {
+						errc <- err
+						return
+					}
+					out <- newDigest(f, raw)
+				}(f.Name())
 			}
-			d := digest{
-				file: f,
-				err:  err,
-			}
-			d.digest(raw)
-			out <- d
-		}(f.Name())
-	}
+		}
+	}()
 
 	go func() {
 		wg.Wait()
@@ -128,4 +124,48 @@ func md5Walk(dir string) (<-chan digest, <-chan error) {
 	}()
 
 	return out, errc
+}
+
+func readDir(ctx context.Context, dir string) (<-chan os.FileInfo, <-chan error) {
+	out, errc := make(chan os.FileInfo, 2), make(chan error, 1)
+	var wg sync.WaitGroup
+
+	files, err := ioutil.ReadDir(dir)
+	if err != nil {
+		errc <- err
+		close(out)
+		return out, errc
+	}
+
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		for _, f := range files {
+			select {
+			case out <- f:
+			case <-ctx.Done():
+				errc <- ctx.Err()
+				return
+			}
+		}
+	}()
+
+	go func() {
+		wg.Wait()
+		close(out)
+		close(errc)
+	}()
+
+	return out, errc
+}
+
+func collate(w io.Writer, mm map[string][md5.Size]byte) {
+	keys := make([]string, 0, len(mm))
+	for k := range mm {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	for _, k := range keys {
+		fmt.Fprintf(w, "%x  %s\n", mm[k], k)
+	}
 }
