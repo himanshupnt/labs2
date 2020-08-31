@@ -19,7 +19,7 @@ import (
 type BookInfo struct {
 	Book  string
 	Lines int
-	IBN   string `ibn:"md5"`
+	IBN   string `ibn:"sha1"`
 	Words int
 }
 
@@ -68,11 +68,17 @@ func hydrate(b interface{}) error {
 	rb.FieldByName("Lines").SetInt(int64(lineCount))
 
 	ibnT, _ := reflect.Indirect(rb).Type().FieldByName("IBN")
-	if tag, ok := ibnT.Tag.Lookup("ibn"); ok {
-		fmt.Printf("%#v\n", tag)
+	encoding, ok := ibnT.Tag.Lookup("ibn")
+	if !ok {
+		return errors.New("You must specify an `ibn encoding tag")
+	}
+	switch encoding {
+	case "sha1":
 		rb.FieldByName("IBN").SetString(fmt.Sprintf("%x", sha1.Sum([]byte(path))))
-	} else if _, ok := ibnT.Tag.Lookup("md5"); ok {
+	case "md5":
 		rb.FieldByName("IBN").SetString(fmt.Sprintf("%x", md5.Sum([]byte(path))))
+	default:
+		return fmt.Errorf("unknown encoding `%s", encoding)
 	}
 
 	return nil
