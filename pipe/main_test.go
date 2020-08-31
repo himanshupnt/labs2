@@ -21,9 +21,15 @@ func TestSerial(t *testing.T) {
 	assert.Equal(t, expected, b.String())
 }
 
-func TestParallel(t *testing.T) {
+func TestParallelFree(t *testing.T) {
 	var b bytes.Buffer
-	assert.Nil(t, md5Parallel(context.Background(), &b, assetDir))
+	assert.Nil(t, md5ParallelFree(context.Background(), &b, assetDir))
+	assert.Equal(t, expected, b.String())
+}
+
+func TestParallelControlled(t *testing.T) {
+	var b bytes.Buffer
+	assert.Nil(t, md5ParallelControlled(context.Background(), &b, assetDir))
 	assert.Equal(t, expected, b.String())
 }
 
@@ -33,10 +39,18 @@ func BenchmarkSerial(b *testing.B) {
 	}
 }
 
-func BenchmarkParallel(b *testing.B) {
+func BenchmarkParallelFree(b *testing.B) {
 	ctx := context.Background()
 	b.ResetTimer()
 	for n := 0; n < b.N; n++ {
-		md5Parallel(ctx, ioutil.Discard, assetDir)
+		md5ParallelFree(ctx, ioutil.Discard, assetDir)
+	}
+}
+
+func BenchmarkParallelControlled(b *testing.B) {
+	ctx := context.Background()
+	b.ResetTimer()
+	for n := 0; n < b.N; n++ {
+		md5ParallelControlled(ctx, ioutil.Discard, assetDir)
 	}
 }
