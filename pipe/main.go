@@ -71,10 +71,6 @@ func md5Serial(w io.Writer, dir string) error {
 func md5Parallel(ctx context.Context, w io.Writer, dir string) error {
 	fileChan, err1 := readDir(ctx, dir)
 	out, err2 := computeDigest(ctx, dir, fileChan)
-	mm := make(map[string][md5.Size]byte)
-	for d := range out {
-		mm[d.file] = d.sum
-	}
 	select {
 	case e, ok := <-err1:
 		if ok {
@@ -84,6 +80,10 @@ func md5Parallel(ctx context.Context, w io.Writer, dir string) error {
 		if ok {
 			return e
 		}
+	}
+	mm := make(map[string][md5.Size]byte)
+	for d := range out {
+		mm[d.file] = d.sum
 	}
 	collate(w, mm)
 
