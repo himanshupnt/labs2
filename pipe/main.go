@@ -27,7 +27,7 @@ func main() {
 	flag.Parse()
 
 	if parallel {
-		if err := md5Pipe("assets"); err != nil {
+		if err := md5Parallel("assets"); err != nil {
 			panic(err)
 		}
 		return
@@ -74,6 +74,6 @@ func collate(mm map[string][md5.Size]byte) {
 	}
 }
 
-func md5Pipe(dir string) error {
-	<<!!YOUR_CODE!!>> -- implement a single stage pipeline to process digests
+func md5Parallel(dir string) error {
+	<<!!YOUR_CODE!!>> -- implement a pipeline to process digests
 }
