@@ -19,7 +19,7 @@ import (
 type BookInfo struct {
 	Book  string
 	Lines int
-	IBN   string `md5:"ibn"`
+	IBN   string `ibn:"md5"`
 	Words int
 }
 
@@ -68,7 +68,8 @@ func hydrate(b interface{}) error {
 	rb.FieldByName("Lines").SetInt(int64(lineCount))
 
 	ibnT, _ := reflect.Indirect(rb).Type().FieldByName("IBN")
-	if _, ok := ibnT.Tag.Lookup("sha1"); ok {
+	if tag, ok := ibnT.Tag.Lookup("ibn"); ok {
+		fmt.Printf("%#v\n", tag)
 		rb.FieldByName("IBN").SetString(fmt.Sprintf("%x", sha1.Sum([]byte(path))))
 	} else if _, ok := ibnT.Tag.Lookup("md5"); ok {
 		rb.FieldByName("IBN").SetString(fmt.Sprintf("%x", md5.Sum([]byte(path))))
