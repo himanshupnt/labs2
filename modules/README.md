@@ -11,6 +11,7 @@
 
 > Package deal!
 <br/>
+
 > Implement two separate modules aka dictionary and picker. The dictionary module produces a list of words from a given dictionary. The picker modules picks a random word leveraging the dictionary module.
 
 ---
