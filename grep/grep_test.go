@@ -8,7 +8,6 @@ import (
 	"testing"
 
 	"github.com/gopherland/labs2/grep"
-	"gotest.tools/assert"
 )
 
 func TestWordCountV1(t *testing.T) {
