@@ -12,13 +12,15 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+const word = "moby"
+
 func TestWordCountV1(t *testing.T) {
 	uu := usecases(t)
 	t.Parallel()
 	for k := range uu {
 		u := uu[k]
 		t.Run(k, func(t *testing.T) {
-			assert.Equal(t, u.e, grep.WordCount("moby", u.text))
+			assert.Equal(t, u.e, grep.WordCount(word, u.text))
 		})
 	}
 }
@@ -29,7 +31,7 @@ func TestWordCountV2(t *testing.T) {
 	for k := range uu {
 		u := uu[k]
 		t.Run(k, func(t *testing.T) {
-			assert.Equal(t, u.e, grep.WordCountBytes("moby", u.text))
+			assert.Equal(t, u.e, grep.WordCountBytes(word, u.text))
 		})
 	}
 }
@@ -37,10 +39,11 @@ func TestWordCountV2(t *testing.T) {
 func BenchmarkWordCountV1(b *testing.B) {
 	raw, _ := ioutil.ReadFile("./assets/moby.txt")
 	txt := string(raw)
+
 	b.ReportAllocs()
 	b.ResetTimer()
 	for n := 0; n < b.N; n++ {
-		grep.WordCount("moby", txt)
+		grep.WordCount(word, txt)
 	}
 }
 
@@ -51,7 +54,7 @@ func BenchmarkWordCountV2(b *testing.B) {
 	b.ResetTimer()
 
 	for n := 0; n < b.N; n++ {
-		grep.WordCountBytes("moby", txt)
+		grep.WordCountBytes(word, txt)
 	}
 }
 
@@ -59,7 +62,7 @@ func BenchmarkWordCountV2(b *testing.B) {
 
 type useCase struct {
 	text string
-	e    int64
+	e    int
 }
 
 type useCases map[string]useCase
