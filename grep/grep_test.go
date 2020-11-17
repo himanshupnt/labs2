@@ -19,11 +19,11 @@ func TestWordCountV2(t *testing.T) {
 }
 
 func BenchmarkWordCountV1(b *testing.B) {
-	<<!!YOUR_CODE!!>> -- Implement the v1 benchmark
+	<<!!YOUR_CODE!!>> -- Implement the v1 benchmark - please use assets/moby.txt for your test and grep for the word moby
 }
 
 func BenchmarkWordCountV2(b *testing.B) {
-	<<!!YOUR_CODE!!>> -- Implement the v2 benchmark
+	<<!!YOUR_CODE!!>> -- Implement the v2 benchmark - please use assets/moby.txt for your test and grep for the word moby
 }
 
 // Helpers...
