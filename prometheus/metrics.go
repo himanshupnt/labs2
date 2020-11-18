@@ -36,7 +36,7 @@ func NewMetrics() *Metrics {
 		}),
 		tally: promauto.NewGauge(prometheus.GaugeOpts{
 			Name: "hangman_tally_total",
-			Help: "The total number of game won or lost",
+			Help: "The total number of games won or lost",
 			ConstLabels: map[string]string{
 				"app": "hangman",
 			},
